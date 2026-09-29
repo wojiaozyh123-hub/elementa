@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Not found — Elementa</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="/elementa/icon.svg" type="image/svg+xml">
+<script>
+  // Friendly paths → app routes: /elementa/e/Na → /elementa/#/e/Na (also /test, /spell/word, /about).
+  (function () {
+    var base = '/elementa/';
+    var p = location.pathname;
+    if (p.indexOf(base) === 0) {
+      var rest = p.slice(base.length).replace(/\/+$/, '');
+      if (/^(e\/[A-Za-z]{1,3}|test|about|spell(\/.+)?)$/.test(rest)) location.replace(base + '#/' + rest);
+    }
+    var l = 'auto';
+    try { l = (JSON.parse(localStorage.getItem('elementa.settings.v1')) || {}).lang || 'auto'; } catch (e) {}
+    if (l !== 'en' && l !== 'zh') l = String(navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
+    document.documentElement.lang = l === 'zh' ? 'zh-Hans' : 'en';
+  })();
+</script>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; color: #fff; }
+  body {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 24px;
+    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased; text-align: center;
+  }
+  html:lang(zh) [data-l="en"], html:not(:lang(zh)) [data-l="zh"] { display: none; }
+  svg { width: 72px; height: 72px; margin-bottom: 12px; opacity: .55; }
+  h1 { font-size: 22px; font-weight: 600; margin: 0; letter-spacing: -.01em; }
+  p { margin: 0; color: #8e8e93; }
+  a { color: #fff; text-underline-offset: 3px; text-decoration-color: #48484a; margin-top: 18px; }
+</style>
+</head>
+<body>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.6" y="4" width="1.8" height="16" rx=".9" fill="#48484a"/><rect x="13.4" y="6.5" width="1.8" height="11" rx=".9" fill="#48484a"/><rect x="16.8" y="8" width="1.8" height="8" rx=".9" fill="#48484a"/><rect x="19.6" y="9" width="1.8" height="6" rx=".9" fill="#48484a"/></svg>
+  <h1><span data-l="en">This wavelength is dark.</span><span data-l="zh">这个波长没有光。</span></h1>
+  <p><span data-l="en">The page you were looking for isn’t here.</span><span data-l="zh">你要找的页面不在这里。</span></p>
+  <a href="/elementa/"><span data-l="en">Back to the periodic table</span><span data-l="zh">回到元素周期表</span></a>
+</body>
+</html>

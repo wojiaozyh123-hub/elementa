@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How Elementa was made</title>
+<meta name="description" content="How Elementa — Hear the Elements was researched, built and checked: NIST data, a 40-octave shift and numerical sound tests.">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://wojiaozyh123-hub.github.io/elementa/making-of.html">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:title" content="How Elementa was made">
+<meta property="og:description" content="How Elementa — Hear the Elements was researched, built and checked: NIST data, a 40-octave shift and numerical sound tests.">
+<meta property="og:image" content="https://wojiaozyh123-hub.github.io/elementa/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script>
+  (function () {
+    var l = 'auto';
+    try { l = (JSON.parse(localStorage.getItem('elementa.settings.v1')) || {}).lang || 'auto'; } catch (e) {}
+    if (l !== 'en' && l !== 'zh') {
+      var list = navigator.languages || [navigator.language || 'en'];
+      l = 'en';
+      for (var i = 0; i < list.length; i++) {
+        var x = String(list[i]).toLowerCase();
+        if (x.indexOf('zh') === 0) { l = 'zh'; break; }
+        if (x.indexOf('en') === 0) break;
+      }
+    }
+    document.documentElement.lang = l === 'zh' ? 'zh-Hans' : 'en';
+  })();
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="static">
+<header class="top">
+  <a class="brand" href="./">
+    <span class="mark"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="4.6" y="4" width="1.8" height="16" rx=".9" fill="#ff2a1a"/><rect x="13.4" y="6.5" width="1.8" height="11" rx=".9" fill="#00c8ff"/><rect x="16.8" y="8" width="1.8" height="8" rx=".9" fill="#4f5bff"/><rect x="19.6" y="9" width="1.8" height="6" rx=".9" fill="#8a3cff"/></svg></span>
+    <span class="wm"><span data-l="en">Elementa</span><span data-l="zh">元素之声</span></span>
+    <span class="sub"><span data-l="en">Hear the Elements</span><span data-l="zh">听见元素周期表</span></span>
+  </a>
+  <nav class="nav">
+    <button type="button" class="ib lang" id="langBtn" aria-label="切换到中文 · Switch to English"><span data-l="en" lang="zh-Hans" aria-hidden="true">中</span><span data-l="zh" lang="en" aria-hidden="true">EN</span></button>
+  </nav>
+</header>
+<main class="page">
+  <h1><span data-l="en">How Elementa was made</span><span data-l="zh">元素之声是怎样做出来的</span></h1>
+  <p class="sub1"><span data-l="en">A short, honest account.</span><span data-l="zh">一段简短而如实的记录。</span></p>
+
+  <p data-l="en">Elementa was designed and built in a single working session by Claude, Anthropic’s AI coding agent, for a chemistry student who had the idea and made the calls along the way. Here is what that session involved.</p>
+  <p data-l="zh">元素之声由 Anthropic 的 AI 编程助手 Claude 在一次连续的工作中设计并构建，为一名化学专业的学生而作——点子和过程中的取舍都来自这位学生。下面是这次工作的内容。</p>
+
+  <h2><span data-l="en">1 · Research</span><span data-l="zh">1 · 调研</span></h2>
+  <p data-l="en">Visible light oscillates at hundreds of terahertz — about forty octaves above what we hear. Earlier projects, W. Walker Smith’s musical periodic table and <cite>Atom Tones</cite>, showed that spectra can be listened to. Elementa keeps the mapping as plain as possible: every frequency is divided by exactly 2<sup>40</sup>, with no stretching, so the intervals you hear are the true ratios of the light.</p>
+  <p data-l="zh">可见光的振动频率是几百太赫兹——大约比我们能听到的声音高 40 个八度。W. Walker Smith 的“音乐元素周期表”和 <cite>Atom Tones</cite> 等项目已经证明光谱可以被“听”。元素之声让映射尽量简单：每个频率都除以恰好 2<sup>40</sup>，不做任何拉伸，所以你听到的音程就是光本身的真实频率比。</p>
+
+  <h2><span data-l="en">2 · Data pipeline</span><span data-l="zh">2 · 数据处理</span></h2>
+  <p data-l="en">The strong-line tables of the NIST <cite>Handbook of Basic Atomic Spectroscopic Data</cite> (Sansonetti &amp; Martin) were downloaded and parsed for every element. Air wavelengths were converted to vacuum with the Ciddor formula, neutral-atom lines were preferred, and each element kept up to 8 visible and 12 ultraviolet-to-infrared lines — skipping near-duplicates that would muddy a chord, but keeping fine-structure doublets so their beating survives. A spectral hue was computed for each element with the CIE 1931 colour-matching functions. Everything fits in one 77 KB file shared by the web and iPhone versions.</p>
+  <p data-l="zh">程序下载并解析了 NIST《Handbook of Basic Atomic Spectroscopic Data》（Sansonetti 与 Martin）中每种元素的强谱线表。空气中的波长用 Ciddor 公式换算为真空波长，优先采用中性原子谱线；每种元素最多保留 8 条可见光谱线和 12 条紫外到红外谱线——跳过会让和弦变浑浊的相近谱线，但保留精细结构双线，让“拍”得以保留。每种元素的光谱色由 CIE 1931 配色函数计算。所有数据合在一个 77 KB 的文件里，由网页版和 iPhone 版共用。</p>
+
+  <h2><span data-l="en">3 · Sound</span><span data-l="zh">3 · 声音</span></h2>
+  <p data-l="en">Each spectral line is a sine wave with a faint second harmonic, a 6 ms attack and a 1.2 s decay, placed in stereo by its pitch (red left, violet right), then passed through a small hall reverb and a gentle limiter. Because the code’s author cannot hear, the sound was checked numerically: hydrogen and sodium were rendered offline and their spectra measured. Hydrogen’s peaks land at 415, 561, 628 and 665 Hz, and sodium’s doublet beats about once every two seconds, as the physics says it should.</p>
+  <p data-l="zh">每条谱线是一个带有微弱二次谐波的正弦波：6 毫秒起音、1.2 秒衰减，按音高放在立体声中的位置（红在左、紫在右），再经过一个小型厅堂混响和一个柔和的限幅器。由于写代码的一方听不见声音，声音是用数字验证的：离线渲染氢和钠，再测量它们的频谱。氢的峰值落在 415、561、628 和 665 Hz，钠的双线大约每两秒起伏一次，正如物理规律所预言。</p>
+
+  <h2><span data-l="en">4 · Web and iPhone</span><span data-l="zh">4 · 网页版与 iPhone 版</span></h2>
+  <p data-l="en">The web version is plain HTML, CSS and JavaScript: no frameworks, no build step, no requests to anyone else, and small enough to load quickly anywhere. The iPhone and iPad app is a native app built from the same data and the same sound rules. Both share the daily Ear Test, so everyone hears the same five elements on the same day.</p>
+  <p data-l="zh">网页版只用了 HTML、CSS 和 JavaScript：没有框架、没有构建步骤、不向任何第三方发出请求，体积很小，在哪里都能快速加载。iPhone 和 iPad 版是原生应用，使用相同的数据和相同的发声规则。两者共用每日听音测验，所以同一天所有人听到的是同样的五个元素。</p>
+
+  <h2><span data-l="en">Credits</span><span data-l="zh">致谢</span></h2>
+  <p data-l="en">Idea and direction: a chemistry student. Design and code: Claude (Anthropic). Spectral data: NIST Atomic Spectra Database. Inspiration: W. Walker Smith (ACS Spring 2023) and <cite>Atom Tones</cite> (Skidmore, 2019).</p>
+  <p data-l="zh">创意与方向：一名化学系学生。设计与代码：Claude（Anthropic）。光谱数据：NIST 原子光谱数据库。灵感来源：W. Walker Smith（美国化学会 2023 年春季会议）与 <cite>Atom Tones</cite>（Skidmore，2019）。</p>
+  <p><a href="./"><span data-l="en">Open Elementa</span><span data-l="zh">打开元素之声</span></a></p>
+</main>
+<footer class="foot">
+  <span><span data-l="en">Made by a chemistry student</span><span data-l="zh">一名化学系学生制作</span></span>
+  <a href="./"><span data-l="en">Play</span><span data-l="zh">打开元素之声</span></a>
+  <a href="making-of.html"><span data-l="en">Making of</span><span data-l="zh">制作过程</span></a>
+  <a href="support.html"><span data-l="en">Support</span><span data-l="zh">支持</span></a>
+  <a href="privacy.html"><span data-l="en">Privacy</span><span data-l="zh">隐私</span></a>
+</footer>
+<script>
+  (function () {
+    var b = document.getElementById('langBtn');
+    function label() { b.setAttribute('aria-label', document.documentElement.lang.indexOf('zh') === 0 ? 'Switch to English' : '切换到中文'); }
+    label();
+    b.addEventListener('click', function () {
+    var zh = document.documentElement.lang.indexOf('zh') !== 0;
+    document.documentElement.lang = zh ? 'zh-Hans' : 'en';
+    label();
+    try {
+      var s = JSON.parse(localStorage.getItem('elementa.settings.v1')) || {};
+      s.lang = zh ? 'zh' : 'en';
+      localStorage.setItem('elementa.settings.v1', JSON.stringify(s));
+    } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elementa — Hear the Elements · 元素之声</title>
+<meta name="description" content="A periodic table you can play. Every element’s real emission spectrum, shifted down exactly 40 octaves into sound. 元素之声：把每个元素的真实光谱降低 40 个八度，听见元素周期表。">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<meta name="author" content="Elementa">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Elementa">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://wojiaozyh123-hub.github.io/elementa/">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Elementa">
+<meta property="og:title" content="Elementa — Hear the Elements">
+<meta property="og:description" content="Light is 40 octaves above sound. Here is what the elements sound like. 光比声音高 40 个八度——听见元素周期表。">
+<meta property="og:url" content="https://wojiaozyh123-hub.github.io/elementa/">
+<meta property="og:image" content="https://wojiaozyh123-hub.github.io/elementa/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hydrogen’s four spectral lines glowing on black, with the words Elementa — Hear the Elements">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Elementa — Hear the Elements">
+<meta name="twitter:description" content="A periodic table you can play: every element’s real spectrum, 40 octaves down.">
+<meta name="twitter:image" content="https://wojiaozyh123-hub.github.io/elementa/og.png">
+<script>
+  // Language before first paint: saved choice, else the browser's.
+  (function () {
+    var l = 'auto';
+    try { l = (JSON.parse(localStorage.getItem('elementa.settings.v1')) || {}).lang || 'auto'; } catch (e) {}
+    if (l !== 'en' && l !== 'zh') {
+      var list = navigator.languages || [navigator.language || 'en'];
+      l = 'en';
+      for (var i = 0; i < list.length; i++) {
+        var x = String(list[i]).toLowerCase();
+        if (x.indexOf('zh') === 0) { l = 'zh'; break; }
+        if (x.indexOf('en') === 0) break;
+      }
+    }
+    document.documentElement.lang = l === 'zh' ? 'zh-Hans' : 'en';
+  })();
+</script>
+<link rel="stylesheet" href="style.css">
+<link rel="preload" href="elements.json" as="fetch" crossorigin>
+<link rel="modulepreload" href="js/app.js">
+<link rel="modulepreload" href="js/audio.js">
+<link rel="modulepreload" href="js/physics.js">
+<link rel="modulepreload" href="js/spectrum.js">
+<link rel="modulepreload" href="js/table.js">
+<link rel="modulepreload" href="js/i18n.js">
+<link rel="modulepreload" href="js/icons.js">
+<link rel="modulepreload" href="js/config.js">
+<link rel="modulepreload" href="js/keys.js">
+<link rel="modulepreload" href="js/ear.js">
+<link rel="modulepreload" href="js/detail.js">
+<link rel="modulepreload" href="js/explain.js">
+<link rel="modulepreload" href="js/eartest.js">
+<link rel="modulepreload" href="js/spellview.js">
+<link rel="modulepreload" href="js/spell.js">
+<link rel="modulepreload" href="js/card.js">
+<link rel="modulepreload" href="js/about.js">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Elementa — Hear the Elements",
+  "alternateName": "元素之声",
+  "url": "https://wojiaozyh123-hub.github.io/elementa/",
+  "description": "A periodic table you can play. Every element’s real emission spectrum (NIST strong lines) shifted down exactly 40 octaves into sound, with a daily Ear Test and a word speller.",
+  "applicationCategory": "EducationalApplication",
+  "genre": "Chemistry, Music",
+  "operatingSystem": "Any (modern web browser)",
+  "browserRequirements": "Requires JavaScript and the Web Audio API",
+  "inLanguage": ["en", "zh-Hans"],
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "image": "https://wojiaozyh123-hub.github.io/elementa/og.png",
+  "author": { "@type": "Organization", "name": "Elementa", "email": "3528872473@qq.com" }
+}
+</script>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#/" data-a="home">
+    <span id="brandMark" class="mark"></span>
+    <span class="wm" data-t="name">Elementa</span>
+    <span class="sub" data-t="sub">Hear the Elements</span>
+  </a>
+  <nav class="nav">
+    <a class="ib" id="navTable" href="#/" data-a="table" data-tip=""></a>
+    <a class="ib" id="navTest" href="#/test" data-a="test" data-tip=""></a>
+    <a class="ib" id="navSpell" href="#/spell" data-a="spell" data-tip=""></a>
+    <a class="ib" id="navAbout" href="#/about" data-a="about" data-tip=""></a>
+    <button type="button" class="ib lang" id="langBtn" data-tip=""></button>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="view" id="v-play"></section>
+  <section class="view" id="v-el" hidden></section>
+  <section class="view" id="v-test" hidden></section>
+  <section class="view" id="v-spell" hidden></section>
+  <section class="view prose" id="v-about" hidden>
+    <h1 class="vh" data-t="about">How it works</h1>
+    <p class="lead" data-l="en">Light is 40 octaves above sound. Here is what the elements sound like.</p>
+    <p class="lead" data-l="zh">光比声音高 40 个八度。把每个元素的光谱降下来，这就是它们的声音。</p>
+
+    <h2 data-l="en">Light, forty octaves down</h2>
+    <h2 data-l="zh">把光降低 40 个八度</h2>
+    <p data-l="en">Heat an element in a flame or an electric discharge and it glows at a handful of exact wavelengths — its emission spectrum, as individual as a fingerprint. Elementa takes the frequency of each of those lines and halves it forty times. That is exactly 40 octaves down, from hundreds of terahertz to hundreds of hertz:</p>
+    <p data-l="zh">把一种元素放进火焰或放电管里加热，它只会在少数几个精确的波长上发光——这就是它的发射光谱，像指纹一样独一无二。元素之声把每条谱线的频率连续减半 40 次，也就是整整降低 40 个八度，从几百太赫兹降到几百赫兹：</p>
+    <p class="formula"><span>f</span> = <span>c</span> / λ / 2<sup>40</sup> ≈ 272 659.7 / λ<sub>nm</sub> Hz</p>
+    <p data-l="en">Visible light, 380–780 nm, lands between 718 Hz and 350 Hz: every colour we can see fits in about one octave. Hydrogen’s red line at 656.5 nm becomes 415.3 Hz, a G♯. Red sounds low and violet sounds high; in stereo, red sits on the left and violet on the right — the same as on every spectrum strip here.</p>
+    <p data-l="zh">可见光 380–780 nm 落在 718 Hz 到 350 Hz 之间：我们看得见的所有颜色，只占大约一个八度。氢的红线 656.5 nm 变成 415.3 Hz，是一个 G♯。红色低沉、紫色高亢；在立体声里，红在左、紫在右——和这里每一条光谱条的方向一致。</p>
+    <p><button type="button" class="demo" data-demo="H:strum"><span class="halo"></span><span data-t="hearH">Hear hydrogen</span></button></p>
+    <canvas class="strip a-strip" data-strip="H" aria-hidden="true"></canvas>
+
+    <h2 data-l="en">Hear the beat</h2>
+    <h2 data-l="zh">听见“拍”</h2>
+    <p data-l="en">Sodium’s famous yellow light is really two lines, 589.16 and 589.76 nm. Forty octaves down they become 462.8 and 462.3 Hz — so close that together they swell and fade about once every two seconds: a 0.5 Hz beat. Headphones help.</p>
+    <p data-l="zh">钠那著名的黄光其实是两条谱线：589.16 nm 和 589.76 nm。降低 40 个八度后是 462.8 Hz 和 462.3 Hz，两者靠得极近，同时响起时声音大约每两秒起伏一次——这就是 0.5 Hz 的“拍”。戴上耳机听得更清楚。</p>
+    <p><button type="button" class="demo" data-demo="Na:chord"><span class="halo"></span><span data-t="hearNa">Hear sodium’s doublet</span></button></p>
+    <canvas class="strip a-strip" data-strip="Na" data-lo="587.9" data-hi="591" aria-hidden="true"></canvas>
+    <p class="note a-cap"><span data-l="en">Magnified: the two D lines, 0.6 nm apart.</span><span data-l="zh">放大后的两条 D 线，相距 0.6 nm。</span></p>
+
+    <h2 data-l="en">Playing</h2>
+    <h2 data-l="zh">玩法</h2>
+    <ul data-l="en">
+      <li>Tap an element to hear it; drag across the table to strum.</li>
+      <li>Strum plays the lines from red to violet, 65 ms apart. Chord plays them all at once.</li>
+      <li>Keyboard: type a symbol (N, Na, Fe…) to play it. Arrow keys move, Space replays, Enter opens the details.</li>
+      <li>Ear Test: five mystery elements a day — the same puzzle for everyone, on the web and on iPhone.</li>
+      <li>Spell: type any word and hear it spelled in elements. Share it as a link or a picture.</li>
+    </ul>
+    <ul data-l="zh">
+      <li>点一下元素就能听到它；在周期表上滑动可以连续弹奏。</li>
+      <li>琶音从红到紫依次奏出每条谱线，间隔 65 毫秒；和弦则同时奏出。</li>
+      <li>键盘：输入元素符号（N、Na、Fe……）即可演奏；方向键移动，空格重播，回车打开详情。</li>
+      <li>听音测验：每天五个神秘元素——网页和 iPhone 上，所有人的题目都一样。</li>
+      <li>元素拼写：输入任意英文单词，听它被元素符号拼出来，并以链接或图片分享。</li>
+    </ul>
+
+    <h2 data-t="settings">Settings</h2>
+    <div class="settings">
+      <div class="set-row"><span data-t="setTuning">Pitch</span>
+        <div class="seg" data-k="tuned"><button type="button" data-v="0" data-t="pure">Pure</button><button type="button" data-v="1" data-t="tuned">Tuned</button></div></div>
+      <p class="note" data-t="setTuningNote"></p>
+      <div class="set-row"><span data-t="setMode">Playing</span>
+        <div class="seg" data-k="chord"><button type="button" data-v="0" data-t="strum">Strum</button><button type="button" data-v="1" data-t="chord">Chord</button></div></div>
+      <div class="set-row"><span data-t="setRange">Range</span>
+        <div class="seg" data-k="full"><button type="button" data-v="0" data-t="visible">Visible</button><button type="button" data-v="1" data-t="full">UV → IR</button></div></div>
+      <div class="set-row"><span data-t="setLang">Language</span>
+        <div class="seg" data-k="lang"><button type="button" data-v="auto" data-t="auto">Auto</button><button type="button" data-v="en" lang="en">English</button><button type="button" data-v="zh" lang="zh-Hans">中文</button></div></div>
+    </div>
+
+    <h2 data-l="en">The data</h2>
+    <h2 data-l="zh">数据</h2>
+    <p data-l="en">Wavelengths and intensities come from the NIST Atomic Spectra Database — the <cite>Handbook of Basic Atomic Spectroscopic Data</cite> by J. E. Sansonetti and W. C. Martin, strong-lines tables. Air wavelengths are converted to vacuum (Ciddor), and neutral-atom lines are preferred. Each element keeps up to 8 visible lines (12 from ultraviolet to infrared). A line within 0.06–0.7 semitones of a stronger chosen line is skipped so chords stay clear, but fine-structure doublets closer than 0.06 semitones are kept, so you can hear them beat.</p>
+    <p data-l="zh">波长与强度来自美国国家标准与技术研究院（NIST）原子光谱数据库——J. E. Sansonetti 与 W. C. Martin 编写的 <cite>Handbook of Basic Atomic Spectroscopic Data</cite> 强谱线表。空气中的波长已换算为真空波长（Ciddor 公式），并优先采用中性原子的谱线。每种元素最多保留 8 条可见光谱线（紫外到红外共 12 条）。如果一条谱线与已选中的更强谱线相差 0.06–0.7 个半音，就跳过它，让和弦保持清晰；而相差不到 0.06 个半音的精细结构双线会保留下来，让你听见“拍”。</p>
+    <p data-l="en">Some elements have only one or two strong visible lines — palladium, aluminium, chlorine — and that is the physics, not a gap. Astatine, francium and the elements from fermium onward have no lines in these tables, so they stay silent. The small dot on each tile is the element’s spectral hue: its visible lines mixed as the eye would see them, weighted by intensity.</p>
+    <p data-l="zh">有些元素只有一两条强可见光谱线——钯、铝、氯——这是物理事实，并非数据缺失。砹、钫以及从镄开始的元素在这些表中没有谱线，因此保持安静。每个方块角上的小圆点是该元素的光谱色：把它的可见光谱线按强度、按人眼的感知方式混合后的颜色。</p>
+
+    <h2 data-l="en">Credits</h2>
+    <h2 data-l="zh">致谢</h2>
+    <p data-l="en">Inspired by W. Walker Smith’s musical periodic table (ACS Spring 2023) and <cite>Atom Tones</cite> (Skidmore, 2019). Spectral data: NIST. Colours: Dan Bruton’s wavelength-to-RGB approximation.</p>
+    <p data-l="zh">灵感来自 W. Walker Smith 的“音乐元素周期表”（美国化学会 2023 年春季会议）和 <cite>Atom Tones</cite>（Skidmore，2019）。光谱数据：NIST。颜色：Dan Bruton 的波长–RGB 近似算法。</p>
+    <p data-l="en">Made by a chemistry student. Contact: <a href="mailto:3528872473@qq.com">3528872473@qq.com</a>. Elementa collects nothing: no accounts, no analytics, no cookies.</p>
+    <p data-l="zh">由一名化学系学生制作。联系邮箱：<a href="mailto:3528872473@qq.com">3528872473@qq.com</a>。元素之声不收集任何数据：没有账号、没有统计、没有 Cookie。</p>
+    <p class="links"><a href="making-of.html" data-t="makingOf">Making of</a><a href="support.html" data-t="support">Support</a><a href="privacy.html" data-t="privacy">Privacy</a><a class="app-link" hidden data-t="getApp">Get the iPhone app</a></p>
+  </section>
+</main>
+
+<footer class="foot">
+  <span data-t="madeBy">Made by a chemistry student</span>
+  <a href="making-of.html" data-t="makingOf">Making of</a>
+  <a href="support.html" data-t="support">Support</a>
+  <a href="privacy.html" data-t="privacy">Privacy</a>
+  <a class="app-link" hidden data-t="getApp">Get the iPhone app</a>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<noscript><p class="noscript">Elementa needs JavaScript to play sound. · 元素之声需要启用 JavaScript 才能发声。</p></noscript>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

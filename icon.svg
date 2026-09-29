@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<defs><filter id="g" x="-80%" y="-40%" width="260%" height="180%"><feGaussianBlur stdDeviation="2.2"/></filter></defs>
+<rect width="64" height="64" rx="14.4" fill="#000"/>
+<path d="M11 32c4.8-3.2 9.6-3.2 14.4 0s9.6 3.2 14.4 0 9.6-3.2 14.4 0" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width=".7"/>
+<g filter="url(#g)" opacity=".85"><rect x="13.90" y="14.08" width="3.3" height="35.84" rx="1.65" fill="#ff2a1a"/><rect x="35.50" y="19.20" width="3.3" height="25.60" rx="1.65" fill="#00c8ff"/><rect x="43.65" y="22.72" width="3.3" height="18.56" rx="1.65" fill="#4f5bff"/><rect x="47.72" y="24.96" width="3.3" height="14.08" rx="1.65" fill="#8a3cff"/></g>
+<rect x="13.90" y="14.08" width="3.3" height="35.84" rx="1.65" fill="#ff2a1a"/><rect x="35.50" y="19.20" width="3.3" height="25.60" rx="1.65" fill="#00c8ff"/><rect x="43.65" y="22.72" width="3.3" height="18.56" rx="1.65" fill="#4f5bff"/><rect x="47.72" y="24.96" width="3.3" height="14.08" rx="1.65" fill="#8a3cff"/>
+</svg>

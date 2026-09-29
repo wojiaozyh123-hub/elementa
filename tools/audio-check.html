@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Audio check — Elementa</title>
+<style>
+  body { margin: 0; padding: 24px; background: #000; color: #fff; font: 14px/1.5 ui-monospace, Menlo, monospace; }
+  pre { white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<pre id="out">Rendering…</pre>
+<script type="module">
+  import { run } from './audio-check.js';
+  run().then(r => { document.getElementById('out').textContent = JSON.stringify(r, null, 2); })
+    .catch(e => { document.getElementById('out').textContent = String(e && e.stack || e); });
+</script>
+</body>
+</html>
